@@ -102,7 +102,9 @@
         const setupPWA = () => {
             // A. Generate Manifest secara Dinamis
             const iconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="#4f46e5"/><text x="50%" y="55%" font-size="50" text-anchor="middle" alignment-baseline="middle" font-family="sans-serif" fill="white">⏱</text></svg>`;
-            const iconBase64 = `data:image/svg+xml;base64,${btoa(iconSVG)}`;
+            
+            // Fix InvalidCharacterError: Menggunakan encodeURIComponent untuk menangani karakter Unicode (seperti emoji) sebelum dibase64
+            const iconBase64 = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(iconSVG)))}`;
             
             const manifest = {
                 name: "Timer Fokus Pro",
